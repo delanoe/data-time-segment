@@ -1,0 +1,45 @@
+name:                data-time-segment
+version:             0.1.0.0
+-- synopsis:
+-- description:
+homepage:            https://github.com/adelanoe/data-time-segment#readme
+license:             BSD3
+license-file:        LICENSE
+author:              Alexandre Delanoë
+maintainer:          devel@delanoe.org
+copyright:           Copyright: (c) 2017 Alexandre Delanoë
+category:            Data
+build-type:          Simple
+extra-source-files:  README.md
+cabal-version:       >=1.10
+
+library
+  hs-source-dirs:      src
+  exposed-modules:     Data.Time.Segment
+                     , Data.Time.Segment.Main
+                     , Data.Time.Segment.Granularity
+  build-depends:       base >= 4.7 && < 5
+                     , time
+                     , safe
+  default-language:    Haskell2010
+
+executable data-time-segment-exe
+  hs-source-dirs:      app
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+                     , data-time-segment
+  default-language:    Haskell2010
+
+test-suite data-time-segment-test
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      test
+  main-is:             Spec.hs
+  build-depends:       base
+                     , data-time-segment
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  default-language:    Haskell2010
+
+source-repository head
+  type:     git
+  location: https://github.com/adelanoe/data-time-segment
