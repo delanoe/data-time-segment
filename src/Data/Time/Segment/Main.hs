@@ -88,9 +88,25 @@ timesBetween begin end grain | begin == end = [begin]
 
 
 -----------------------------------------------------------------
+-- | Sleep functions
+
+sleep :: Int -> Granularity -> IO ()
+sleep n g = threadDelay (10^6 * sec)
+    where
+        sec = n * (grain2seconds g)
+
+sleepToNext :: Granularity -> IO ()
+sleepToNext g = ( flip mod futur) . round . realToFrac . utctDayTime <$> getCurrentTime
+             >>= \s -> trace (show futur) $ sleep (futur - s) g
+                  where
+                      futur = grain2seconds g
+
+
 sleepToNextMinute :: IO ()
 sleepToNextMinute = do t <- getCurrentTime
-                       let secs = round (realToFrac $ utctDayTime t) `rem` 60
-                       trace (show secs) $ threadDelay $ 10^6 * (60 - secs)
+                       let secs = mod (round (realToFrac $ utctDayTime t)) 60
+                       trace (show secs) $ sleep (60 - secs) S1
+
+
 
 -----------------------------------------------------------------

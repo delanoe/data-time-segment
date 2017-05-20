@@ -9,7 +9,7 @@ data Granularity =
     H12 | H8  | H6  | H4  | H3 | H2 | H1 |
     M30 | M15 | M10 | M5  | M1 |
     -- M30 | M15 | M10 | M5  | M4 | M3 | M2 | M1 |
-    S30 | S15 | S10 | S5 
+    S30 | S15 | S10 | S5  | S1
    deriving (Show, Read, Eq, Ord, Enum, Bounded)
 
 -- grains ?
@@ -18,6 +18,7 @@ allGranularity = [minBound..maxBound]
 
 grain2seconds :: Granularity -> Int
 grain2seconds grain = case grain of
+                        S1  -> 1
                         S5  -> 5
                         S10 -> 10
                         S15 -> 15
@@ -43,6 +44,7 @@ grain2seconds grain = case grain of
 
 grain2seconds' :: Granularity -> NominalDiffTime
 grain2seconds' grain = case grain of
+                        S1  -> 1
                         S5  -> 5
                         S10 -> 10
                         S15 -> 15
