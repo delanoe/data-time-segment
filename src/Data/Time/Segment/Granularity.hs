@@ -1,7 +1,12 @@
+
+{-# LANGUAGE DeriveGeneric #-} 
+
 module Data.Time.Segment.Granularity where
 
 import qualified Safe as S (headMay)
 import Data.Time (UTCTime, getCurrentTime, NominalDiffTime)
+import GHC.Generics (Generic)
+import Data.Aeson (FromJSON, ToJSON)
 
 -- Grain is time size/density
 data Granularity =
@@ -10,7 +15,10 @@ data Granularity =
     M30 | M15 | M10 | M5  | M1 |
     -- M30 | M15 | M10 | M5  | M4 | M3 | M2 | M1 |
     S30 | S15 | S10 | S5  | S1
-   deriving (Show, Read, Eq, Ord, Enum, Bounded)
+   deriving (Show, Read, Eq, Ord, Enum, Bounded, Generic)
+
+instance FromJSON Granularity
+instance ToJSON   Granularity
 
 -- grains ?
 allGranularity :: [Granularity]

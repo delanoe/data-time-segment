@@ -21,6 +21,8 @@ library
   build-depends:       base >= 4.7 && < 5
                      , time
                      , safe
+                     , aeson
+                     , clock
   default-language:    Haskell2010
 
 executable data-time-segment-exe

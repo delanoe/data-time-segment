@@ -12,6 +12,8 @@ import Data.Time.Calendar.OrdinalDate (sundayStartWeek)
 import Data.Fixed (Pico)
 import Control.Concurrent (threadDelay)
 
+now :: IO UTCTime
+now = getCurrentTime
 
 -----------------------------------------------------------------
 date :: Integer -> Int -> Int -> Int -> Int -> Pico -> UTCTime
